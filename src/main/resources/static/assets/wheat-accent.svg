@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 240" fill="none">
+  <!-- Elegant Wheat Stalk Graphic -->
+  <path d="M60 230 C 60 170, 58 110, 60 20" stroke="#40916C" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Left grains -->
+  <path d="M60 160 C 45 155, 36 142, 42 130 C 47 122, 56 130, 60 142 Z" fill="#52B788" opacity="0.85"/>
+  <path d="M42 130 L 26 108" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+  
+  <path d="M60 135 C 45 130, 36 117, 42 105 C 47 97, 56 105, 60 117 Z" fill="#52B788" opacity="0.9"/>
+  <path d="M42 105 L 24 82" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 110 C 45 105, 36 92, 42 80 C 47 72, 56 80, 60 92 Z" fill="#52B788" opacity="0.95"/>
+  <path d="M42 80 L 22 56" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 85 C 47 80, 39 68, 44 56 C 49 48, 57 56, 60 67 Z" fill="#74C69D"/>
+  <path d="M44 56 L 26 32" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 60 C 48 56, 42 45, 47 35 C 51 29, 58 36, 60 45 Z" fill="#74C69D"/>
+  <path d="M47 35 L 32 12" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Right grains -->
+  <path d="M60 148 C 75 143, 84 130, 78 118 C 73 110, 64 118, 60 130 Z" fill="#52B788" opacity="0.85"/>
+  <path d="M78 118 L 94 96" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 123 C 75 118, 84 105, 78 93 C 73 85, 64 93, 60 105 Z" fill="#52B788" opacity="0.9"/>
+  <path d="M78 93 L 96 70" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 98 C 75 93, 84 80, 78 68 C 73 60, 64 68, 60 80 Z" fill="#52B788" opacity="0.95"/>
+  <path d="M78 68 L 98 44" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 73 C 73 68, 81 56, 76 44 C 71 36, 63 44, 60 55 Z" fill="#74C69D"/>
+  <path d="M76 44 L 94 20" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <path d="M60 48 C 72 44, 78 33, 73 23 C 69 17, 62 24, 60 33 Z" fill="#74C69D"/>
+  <path d="M73 23 L 88 2" stroke="#2D6A4F" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Top apical spikelet -->
+  <path d="M60 30 C 56 20, 60 10, 60 6 C 61 10, 65 20, 60 30 Z" fill="#95D5B2"/>
+  <path d="M60 6 L 60 -10" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

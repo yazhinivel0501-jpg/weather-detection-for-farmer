@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Weather Detection &amp; Advisory System for Farmers</title>
+  
+  <!-- Modern Google Fonts: Plus Jakarta Sans for high legibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/wheat-accent.svg">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================= -->
+  <nav class="top-nav" id="top-nav">
+    <div class="nav-container">
+      <div class="brand-logo">
+        <div class="brand-icon-box" title="Smart Weather Agro System">
+          <!-- Agricultural Stalk & Sun Icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v8"/>
+            <path d="m4.93 4.93 4.24 4.24"/>
+            <path d="M2 12h8"/>
+            <path d="m14 10 3-3"/>
+            <path d="M12 14c-4 0-6 3-6 8h12c0-5-2-8-6-8z"/>
+          </svg>
+        </div>
+        <div class="brand-text">Agri<span>Weather</span></div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#hero-view" class="nav-link active" data-i18n="navHome">Home</a></li>
+        <li><a href="#dashboard-view" class="nav-link" data-i18n="navRadar">Live Radar</a></li>
+        <li><a href="#forecast-section" class="nav-link" data-i18n="navForecast">7-Day Forecast</a></li>
+        <li><a href="#farming-advisory-section" class="nav-link" data-i18n="navAdvisory">Farm Advisory</a></li>
+        <li><a href="#history-section" class="nav-link" data-i18n="navTrends">Trends</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Multi-Language Selector Dropdown -->
+        <div class="lang-selector-box" id="lang-selector-box">
+          <button class="lang-select-btn" id="lang-select-btn" title="Choose Language">
+            <span class="globe-icon">🌐</span>
+            <span id="current-lang-label">English</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="lang-dropdown-menu" id="lang-dropdown-menu" style="display: none;">
+            <div class="lang-option active" data-lang="en"><span class="lang-code">EN</span> English</div>
+            <div class="lang-option" data-lang="ta"><span class="lang-code">த</span> தமிழ் (Tamil)</div>
+            <div class="lang-option" data-lang="hi"><span class="lang-code">हि</span> हिन्दी (Hindi)</div>
+            <div class="lang-option" data-lang="te"><span class="lang-code">తె</span> తెలుగు (Telugu)</div>
+            <div class="lang-option" data-lang="ml"><span class="lang-code">മല</span> മലയാളം (Malayalam)</div>
+            <div class="lang-option" data-lang="kn"><span class="lang-code">ಕ</span> ಕನ್ನಡ (Kannada)</div>
+            <div class="lang-option" data-lang="bn"><span class="lang-code">বা</span> বাংলা (Bengali)</div>
+            <div class="lang-option" data-lang="mr"><span class="lang-code">म</span> मराठी (Marathi)</div>
+            <div class="lang-option" data-lang="gu"><span class="lang-code">ગુ</span> ગુજરાતી (Gujarati)</div>
+            <div class="lang-option" data-lang="pa"><span class="lang-code">ਪੰ</span> ਪੰਜਾਬੀ (Punjabi)</div>
+            <div class="lang-option" data-lang="ur"><span class="lang-code">اردو</span> اردو (Urdu)</div>
+          </div>
+        </div>
+
+        <div class="live-badge">
+          <span class="pulsing-dot"></span>
+          <span data-i18n="liveSensors">Live Sensors Active</span>
+        </div>
+
+        <button id="unit-toggle-btn" class="unit-toggle-btn" title="Toggle °C / °F">
+          <span>Units:</span> <strong>°C</strong>
+        </button>
+
+        <!-- Farmer Login & Profile Pill -->
+        <button class="nav-login-btn" id="nav-login-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span data-i18n="navLogin">Farmer Login</span>
+        </button>
+
+        <div class="nav-user-profile" id="nav-user-profile" style="display: none;">
+          <div class="user-avatar-badge">
+            <span class="user-avatar-icon">🌾</span>
+            <div class="user-avatar-info">
+              <span class="user-name">Kailash (Farmer)</span>
+              <span class="user-id">#KR-4091</span>
+            </div>
+          </div>
+          <button class="btn-logout" id="btn-logout" title="Logout" data-i18n="navLogout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       HERO SECTION
+       - Green gradient background
+       - Beautiful farmer / agriculture landscape
+       - Subtle wheat and rice/paddy elements
+       - Weather / cloud / sun icons
+       - Large Title: "Smart Weather Detection & Advisory System for Farmers"
+       - Subtitle: "Smart weather insights for better farming decisions"
+       - Buttons: "Check Weather", "View Forecast"
+       ========================================================================= -->
+  <header class="hero-section" id="hero-view">
+    <!-- Subtle vector illustrations for wheat and rice/paddy -->
+    <img src="assets/wheat-accent.svg" alt="" class="hero-decor-wheat" aria-hidden="true">
+    <img src="assets/rice-paddy.svg" alt="" class="hero-decor-rice" aria-hidden="true">
+    
+    <!-- Agricultural farm landscape silhouette along the base of the hero -->
+    <div class="hero-landscape-bg" aria-hidden="true"></div>
+
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18h-2v-1.07A6 6 0 0 1 6.07 12H5v-2h1.07A6 6 0 0 1 11 4.93V4h2v.93A6 6 0 0 1 17.93 10H19v2h-1.07A6 6 0 0 1 13 16.93z"/>
+          </svg>
+          <span data-i18n="heroBadge">AI-Powered Precision Agrometeorology</span>
+        </div>
+
+        <h1 class="hero-title" id="hero-title-el">
+          Smart Weather Detection &amp; <span>Advisory System</span> for Farmers
+        </h1>
+
+        <p class="hero-subtitle" data-i18n="heroSubtitle">
+          Smart weather insights for better farming decisions
+        </p>
+
+        <div class="hero-actions">
+          <a href="#dashboard-view" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/>
+            </svg>
+            <span data-i18n="btnCheckWeather">Check Weather</span>
+          </a>
+          <a href="#forecast-section" class="btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span data-i18n="btnViewForecast">View Forecast</span>
+          </a>
+        </div>
+
+        <!-- Global Location Search Bar & Interactive Forecast Trigger -->
+        <div class="hero-search-wrapper" id="hero-search-wrapper">
+          <div class="hero-search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="hero-search-input" class="hero-search-input" placeholder="Search agricultural district or city (e.g., Thanjavur, Ludhiana, Pune)..." aria-label="Search farming location" autocomplete="off" data-i18n-placeholder="searchPlaceholder">
+            <button id="hero-search-btn" class="hero-search-btn" title="Click to view weather forecast">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <span data-i18n="btnViewForecast">View Forecast</span>
+            </button>
+          </div>
+
+          <!-- Instant Search Suggestions & Forecast Quick Picks -->
+          <div class="search-dropdown" id="search-dropdown" style="display: none;">
+            <div class="dropdown-header" data-i18n="dropdownHeader">🌾 Click any region to view live forecast &amp; weather:</div>
+            <div class="dropdown-item" data-query="Thanjavur">
+              <span class="dropdown-icon">🌾</span>
+              <div class="dropdown-meta">
+                <span class="dropdown-title">Thanjavur, Tamil Nadu</span>
+                <span class="dropdown-sub">Cauvery Delta • Rice/Paddy &amp; Pulses</span>
+              </div>
+              <span class="dropdown-badge" data-i18n="viewForecastTag">View Forecast</span>
+            </div>
+            <div class="dropdown-item" data-query="Ludhiana">
+              <span class="dropdown-icon">🌾</span>
+              <div class="dropdown-meta">
+                <span class="dropdown-title">Ludhiana, Punjab</span>
+                <span class="dropdown-sub">Wheat Belt, Mustard &amp; Cotton</span>
+              </div>
+              <span class="dropdown-badge" data-i18n="viewForecastTag">View Forecast</span>
+            </div>
+            <div class="dropdown-item" data-query="Nashik">
+              <span class="dropdown-icon">🍇</span>
+              <div class="dropdown-meta">
+                <span class="dropdown-title">Nashik, Maharashtra</span>
+                <span class="dropdown-sub">Horticulture, Grapes &amp; Onions</span>
+              </div>
+              <span class="dropdown-badge" data-i18n="viewForecastTag">View Forecast</span>
+            </div>
+            <div class="dropdown-item" data-query="Guntur">
+              <span class="dropdown-icon">🌶️</span>
+              <div class="dropdown-meta">
+                <span class="dropdown-title">Guntur, Andhra Pradesh</span>
+                <span class="dropdown-sub">Krishna Basin • Chilli, Paddy &amp; Cotton</span>
+              </div>
+              <span class="dropdown-badge" data-i18n="viewForecastTag">View Forecast</span>
+            </div>
+            <div class="dropdown-item" data-query="Bhopal">
+              <span class="dropdown-icon">🌱</span>
+              <div class="dropdown-meta">
+                <span class="dropdown-title">Bhopal, Madhya Pradesh</span>
+                <span class="dropdown-sub">Central Plateau • Soybean, Wheat &amp; Gram</span>
+              </div>
+              <span class="dropdown-badge" data-i18n="viewForecastTag">View Forecast</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Agricultural Presets -->
+        <div class="hero-presets">
+          <span data-i18n="majorHubs">Major Agri Hubs:</span>
+          <button class="preset-chip" data-region="thanjavur" title="View Thanjavur forecast">🌾 Thanjavur (Cauvery Delta)</button>
+          <button class="preset-chip" data-region="ludhiana" title="View Ludhiana forecast">🌾 Ludhiana (Wheat Belt)</button>
+          <button class="preset-chip" data-region="nashik" title="View Nashik forecast">🍇 Nashik (Horticulture)</button>
+          <button class="preset-chip" data-region="guntur" title="View Guntur forecast">🌶️ Guntur (Krishna Basin)</button>
+          <button class="preset-chip" data-region="bhopal" title="View Bhopal forecast">🌱 Bhopal (Soybean &amp; Wheat)</button>
+        </div>
+      </div>
+
+      <!-- Hero Weather Live Snapshot Card (Glassmorphism) -->
+      <div class="hero-weather-card">
+        <img src="assets/wheat-accent.svg" alt="" class="hero-card-wheat-accent" aria-hidden="true">
+
+        <div class="hero-card-header">
+          <div class="hero-card-location">
+            <h3 id="hero-location-name">Thanjavur (Cauvery Delta)</h3>
+            <p id="hero-location-sub">Tamil Nadu • Focus: Rice / Paddy, Pulses</p>
+          </div>
+          <div class="hero-weather-icon-box" id="hero-weather-icon">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="hero-temp-row">
+          <div class="hero-large-temp" id="hero-temp-val">29°C</div>
+          <div class="hero-condition-text" id="hero-cond-val">Partly Cloudy</div>
+        </div>
+
+        <div class="hero-card-metrics">
+          <div class="hero-metric-item">
+            <span class="hero-metric-label" data-i18n="relativeHumidity">Humidity</span>
+            <span class="hero-metric-val" id="hero-metric-humidity">68%</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-label" data-i18n="protParamLabel">Wind Speed</span>
+            <span class="hero-metric-val" id="hero-metric-wind">11 km/h</span>
+          </div>
+          <div class="hero-metric-item">
+            <span class="hero-metric-label" data-i18n="precipChance">Rain Chance</span>
+            <span class="hero-metric-val" id="hero-metric-rain">15%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN DASHBOARD CONTAINER
+       ========================================================================= -->
+  <main class="dashboard-container" id="dashboard-view">
+
+    <!-- GREEN SIDEBAR -->
+    <aside class="dashboard-sidebar">
+      <div>
+        <div class="sidebar-heading" data-i18n="navMenu">Navigation Menu</div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-btn active" data-target="dashboard-view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span data-i18n="currentWeather">Current Weather</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-btn" data-target="forecast-section">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span data-i18n="sevenDayForecast">7-Day Agro Forecast</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-btn" data-target="farming-advisory-section">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span data-i18n="farmingAdvisories">Farming Advisories</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-btn" data-target="history-section">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+              <span data-i18n="weatherTrends">Weather Trends &amp; Rain</span>
+            </button>
+          </li>
+        </ul>
+
+        <!-- Simulated Agricultural IoT Sensor Card -->
+        <div class="sidebar-sensor-box">
+          <div class="sensor-title">
+            <span data-i18n="soilSensorsTitle">🌾 Soil &amp; Microclimate IoT</span>
+            <span class="sensor-status-dot" title="Sensor node online"></span>
+          </div>
+          <div class="sensor-row">
+            <span data-i18n="sensorSoilMoisture">Soil Moisture (15cm)</span>
+            <span id="sensor-soil-moisture">38%</span>
+          </div>
+          <div class="sensor-row">
+            <span data-i18n="sensorSoilTemp">Soil Temp (10cm)</span>
+            <span id="sensor-soil-temp">27.4°C</span>
+          </div>
+          <div class="sensor-row">
+            <span data-i18n="sensorDewPoint">Dew Point</span>
+            <span id="sensor-dew-point">22.6°C</span>
+          </div>
+          <div class="sensor-row">
+            <span data-i18n="sensorLeafWetness">Leaf Wetness</span>
+            <span id="sensor-leaf-wetness" data-i18n="leafWetnessLow">Minimal (Low Fungal Risk)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farmer Support Helpline Box -->
+      <div class="sidebar-farmer-help">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <div>
+          <div data-i18n="kisanHelpline">Kisan Call Centre: <strong>1800-180-1551</strong></div>
+          <div style="opacity: 0.8; font-size: 0.72rem;" data-i18n="freeAdvisory">Free Agro-Advisory Helpline</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- DASHBOARD MAIN CONTENT -->
+    <div class="dashboard-main">
+
+      <!-- WEATHER ALERT CARD (Dynamic) -->
+      <div class="weather-alert-card" id="agro-weather-alert">
+        <div class="alert-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="alert-body">
+          <h4 id="alert-title">
+            <span>🌱 Favorable Agricultural Weather Window</span>
+            <span class="alert-tag" id="alert-tag">OPTIMAL WINDOW</span>
+          </h4>
+          <p id="alert-desc">
+            Weather conditions are stable across temperature, humidity, and wind speed. Ideal window for weeding, tillage, and planned fertilizer application.
+          </p>
+        </div>
+      </div>
+
+      <!-- TOP METRICS GRID: CURRENT WEATHER, RAINFALL, HUMIDITY -->
+      <div class="dashboard-top-grid">
+
+        <!-- CARD 1: Core Weather & Prominent Temperature -->
+        <div class="weather-card">
+          <img src="assets/wheat-accent.svg" alt="" class="card-wheat-watermark" aria-hidden="true">
+          
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+              </svg>
+              <h3 class="card-title" id="dashboard-location-title">Thanjavur, Tamil Nadu</h3>
+            </div>
+            <span class="card-badge" data-i18n="cardLiveSensor">Live Sensor</span>
+          </div>
+
+          <div class="prominent-temp-box">
+            <div>
+              <div class="temp-primary-reading" id="dash-temp-val">29°C</div>
+              <div class="temp-subtext" id="dash-feels-like">Feels like 31°C</div>
+            </div>
+            <div class="temp-condition-box">
+              <div class="temp-weather-icon" id="dash-weather-icon">
+                <!-- Weather SVG -->
+              </div>
+              <div class="temp-condition-label" id="dash-condition-text">Partly Cloudy</div>
+            </div>
+          </div>
+
+          <div class="agro-suitability-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span id="dash-agro-suitability">Optimal solar radiation for photosynthesis and transplanting.</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: Rainfall & Precipitation -->
+        <div class="weather-card">
+          <img src="assets/rice-paddy.svg" alt="" class="card-wheat-watermark" aria-hidden="true">
+
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+                <path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/>
+              </svg>
+              <h3 class="card-title" data-i18n="rainfallForecast">Rainfall Forecast</h3>
+            </div>
+            <span class="card-badge" data-i18n="radar24h">24h Radar</span>
+          </div>
+
+          <div class="metric-numeric-display">
+            <span class="metric-big-number" id="dash-rain-val">0.2</span>
+            <span class="metric-unit" data-i18n="expected">mm expected</span>
+          </div>
+
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="dash-rain-bar" style="width: 15%;"></div>
+          </div>
+
+          <div class="card-micro-stats">
+            <span data-i18n="precipChance">Precipitation Chance</span>
+            <strong id="dash-rain-prob">15%</strong>
+          </div>
+          <div class="card-micro-stats">
+            <span data-i18n="trafficability">Field Trafficability</span>
+            <strong style="color: #2D6A4F;" id="field-traffic-val" data-i18n="trafficGood">Good (Tractors Ready)</strong>
+          </div>
+        </div>
+
+        <!-- CARD 3: Humidity & Crop Transpiration -->
+        <div class="weather-card">
+          <img src="assets/wheat-accent.svg" alt="" class="card-wheat-watermark" aria-hidden="true">
+
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              </svg>
+              <h3 class="card-title" data-i18n="relativeHumidity">Relative Humidity</h3>
+            </div>
+            <span class="card-badge" data-i18n="foliarMoisture">Foliar Moisture</span>
+          </div>
+
+          <div class="metric-numeric-display">
+            <span class="metric-big-number" id="dash-humidity-val">68</span>
+            <span class="metric-unit">%</span>
+          </div>
+
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="dash-humidity-bar" style="width: 68%;"></div>
+          </div>
+
+          <div class="card-micro-stats">
+            <span data-i18n="fungalRisk">Fungal Disease Risk</span>
+            <strong id="dash-humidity-status" data-i18n="humidityOptimal">Optimal (Balanced)</strong>
+          </div>
+          <div class="card-micro-stats">
+            <span data-i18n="evapRate">Evaporation Rate</span>
+            <strong id="dash-evap-val" data-i18n="evapModerate">3.4 mm/day (Moderate)</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 7-DAY FORECAST SECTION -->
+      <section class="forecast-section" id="forecast-section">
+        <div class="section-header-banner">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="section-title" data-i18n="forecastTitle">7-Day Agro-Weather Outlook</h2>
+              <p class="section-subtitle" data-i18n="forecastSubtitle">Predictive weather indicators mapped directly to farming suitability</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="forecast-grid" id="forecast-cards-container">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </section>
+
+      <!-- FARMING RECOMMENDATION CARDS SECTION -->
+      <section class="farming-advisory-section" id="farming-advisory-section">
+        <div class="section-header-banner">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="section-title" data-i18n="advisoryTitle">Farming Recommendation Engine</h2>
+              <p class="section-subtitle" data-i18n="advisorySubtitle">Actionable agronomic advisories generated from real-time microclimate sensors</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 CARDS: Wheat, Rice/Paddy, Irrigation, Sowing, Harvesting, Crop Protection -->
+        <div class="advisory-grid">
+
+          <!-- 1. Wheat Farming -->
+          <div class="advisory-card">
+            <img src="assets/wheat-accent.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">🌾</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="wheatTitle">Wheat Farming</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-wheat-badge" data-i18n="wheatOptimalBadge">Optimal Conditions</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-wheat-text" data-i18n="wheatOptimalText">
+                Current temperature is ideal for tillering and vegetative growth. Proceed with scheduled crown root irrigation and nitrogen top-dressing.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="wheatParamLabel">Target Crop Stage</span>
+              <span id="advisory-wheat-param" data-i18n="wheatTilleringFavorable">Tillering Window: Favorable</span>
+            </div>
+          </div>
+
+          <!-- 2. Rice / Paddy Farming -->
+          <div class="advisory-card">
+            <img src="assets/rice-paddy.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">🌾</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="riceTitle">Rice / Paddy Farming</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-rice-badge" data-i18n="riceOptimalBadge">Normal Water Level</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-rice-text" data-i18n="riceOptimalText">
+                Stable weather conditions. Maintain 4-5 cm standing water layer during tillering and panicle development to control weeds and ensure nutrient uptake.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="riceParamLabel">Water Ponding</span>
+              <span id="advisory-rice-param" data-i18n="riceDepthStandard">Depth: 4 - 5 cm</span>
+            </div>
+          </div>
+
+          <!-- 3. Irrigation Management -->
+          <div class="advisory-card">
+            <img src="assets/wheat-accent.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">💧</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="irrTitle">Irrigation Schedule</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-irr-badge" data-i18n="irrDueBadge">Irrigation Due</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-irr-text" data-i18n="irrDueText">
+                Low rain chance. Soil evapotranspiration is normal. Schedule drip or furrow irrigation in early morning or late afternoon to minimize evaporation losses.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="irrParamLabel">Recommended Timing</span>
+              <span id="advisory-irr-param" data-i18n="irrTimingMorning">6:00 AM - 9:00 AM</span>
+            </div>
+          </div>
+
+          <!-- 4. Sowing Advisory -->
+          <div class="advisory-card">
+            <img src="assets/wheat-accent.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">🌱</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="sowTitle">Sowing &amp; Nursery</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-sow-badge" data-i18n="sowGoodBadge">Good Window</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-sow-text" data-i18n="sowGoodText">
+                Soil conditions and ambient temperatures provide an ideal germination environment. Treat seeds with Trichoderma / Rhizobium before sowing.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="sowParamLabel">Germination Index</span>
+              <span id="advisory-sow-param" data-i18n="sowSuitabilityHigh">Soil Suitability: 92% (High)</span>
+            </div>
+          </div>
+
+          <!-- 5. Harvesting Advisory -->
+          <div class="advisory-card">
+            <img src="assets/wheat-accent.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">🚜</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="harvTitle">Harvesting Window</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-harv-badge" data-i18n="harvIdealBadge">Ideal Window</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-harv-text" data-i18n="harvIdealText">
+                Clear weather and low atmospheric moisture allow dry grain harvesting. Target grain moisture of 14-16% for safe storage and milling.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="harvParamLabel">Grain Moisture</span>
+              <span id="advisory-harv-param" data-i18n="harvTargetMoisture">Moisture Target: 14% - 16%</span>
+            </div>
+          </div>
+
+          <!-- 6. Crop Protection -->
+          <div class="advisory-card">
+            <img src="assets/rice-paddy.svg" alt="" class="advisory-corner-wheat" aria-hidden="true">
+            <div>
+              <div class="advisory-card-top">
+                <div class="advisory-avatar">🛡️</div>
+                <div class="advisory-title-group">
+                  <h4 data-i18n="protTitle">Crop Protection</h4>
+                  <span class="advisory-status-badge badge-optimal" id="advisory-prot-badge" data-i18n="protSafeBadge">Safe Spray Window</span>
+                </div>
+              </div>
+              <p class="advisory-text" id="advisory-prot-text" data-i18n="protSafeText">
+                Gentle breeze and zero rain allow uniform foliar coverage. Wear protective equipment and spray along the natural wind direction.
+              </p>
+            </div>
+            <div class="advisory-parameters">
+              <span data-i18n="protParamLabel">Wind Drift Risk</span>
+              <span id="advisory-prot-param" data-i18n="protSprayEfficacyHigh">Spray Efficacy: High</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- WEATHER HISTORY & GRAPHS SECTION -->
+      <section class="history-section" id="history-section">
+        <div class="chart-card-wrapper">
+          <div class="chart-header">
+            <div class="section-title-wrap">
+              <div class="section-icon-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="card-title" style="font-size: 1.25rem;" data-i18n="trendsTitle">Agro-Meteorological Trends &amp; History</h3>
+                <p class="section-subtitle" data-i18n="trendsSubtitle">Visual 7-day temperature trajectory and precipitation distribution</p>
+              </div>
+            </div>
+
+            <div class="chart-tabs">
+              <button class="chart-tab-btn active" id="chart-tab-temp" data-i18n="tempCurve">Temperature Curve</button>
+              <button class="chart-tab-btn" id="chart-tab-rain" data-i18n="precipVolume">Precipitation Volume</button>
+            </div>
+          </div>
+
+          <div class="chart-canvas-container">
+            <canvas id="weather-trend-chart"></canvas>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER SECTION
+       ========================================================================= -->
+  <footer class="site-footer">
+    <!-- Subtle corner illustrations for wheat and rice -->
+    <img src="assets/wheat-accent.svg" alt="" class="footer-wheat-left" aria-hidden="true">
+    <img src="assets/rice-paddy.svg" alt="" class="footer-rice-right" aria-hidden="true">
+
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="brand-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v8"/>
+              <path d="m4.93 4.93 4.24 4.24"/>
+              <path d="M2 12h8"/>
+              <path d="m14 10 3-3"/>
+              <path d="M12 14c-4 0-6 3-6 8h12c0-5-2-8-6-8z"/>
+            </svg>
+          </div>
+          <span>AgriWeather AI</span>
+        </div>
+        <p class="footer-tagline" data-i18n="footerTagline">
+          Smart Weather Detection &amp; Advisory System for Farmers. Empowering agricultural communities with hyper-local microclimate intelligence.
+        </p>
+        <div class="footer-academic-pill" data-i18n="academicProject">
+          🎓 College Capstone Engineering Project
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-i18n="quickLinks">Quick Links</h5>
+        <ul class="footer-links-list">
+          <li><a href="#hero-view" data-i18n="navHome">Home Overview</a></li>
+          <li><a href="#dashboard-view" data-i18n="navRadar">Live Weather Radar</a></li>
+          <li><a href="#forecast-section" data-i18n="navForecast">7-Day Agro Forecast</a></li>
+          <li><a href="#farming-advisory-section" data-i18n="navAdvisory">Crop Recommendations</a></li>
+          <li><a href="#history-section" data-i18n="navTrends">Weather Trends</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-i18n="farmingResources">Farming Resources</h5>
+        <ul class="footer-links-list">
+          <li><a href="#farming-advisory-section" data-i18n="wheatTitle">🌾 Wheat Farming Guide</a></li>
+          <li><a href="#farming-advisory-section" data-i18n="riceTitle">🌾 Rice / Paddy Management</a></li>
+          <li><a href="#farming-advisory-section" data-i18n="irrTitle">💧 Smart Irrigation Planner</a></li>
+          <li><a href="#farming-advisory-section" data-i18n="sowTitle">🌱 Sowing Readiness Index</a></li>
+          <li><a href="#farming-advisory-section" data-i18n="protTitle">🛡️ Pest &amp; Disease Protection</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 data-i18n="contactProject">Contact &amp; Project Info</h5>
+        <div class="footer-contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span data-i18n="deptName">Department of Computer Science &amp; Engineering, College Project Presentation</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>project-support@agriweather.edu.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span data-i18n="kisanHelpline">Farmer Advisory Helpline: 1800-180-1551 (Toll-free)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div>
+        &copy; 2026 <strong data-i18n="copyrightText">Smart Weather Detection &amp; Advisory System for Farmers</strong>.
+      </div>
+      <div data-i18n="academicNote">
+        Designed with precision for sustainable agriculture &amp; academic evaluation.
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       FARMER LOGIN MODAL
+       ========================================================================= -->
+  <div class="modal-backdrop" id="login-modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <img src="assets/wheat-accent.svg" alt="" class="modal-wheat-watermark" aria-hidden="true">
+      <button class="modal-close-btn" id="login-modal-close" title="Close Modal">&times;</button>
+
+      <div class="modal-header-box">
+        <div class="modal-icon-badge">🌾</div>
+        <h3 class="modal-title" data-i18n="loginTitle">Farmer Portal Login</h3>
+        <p class="modal-subtitle" data-i18n="loginSubtitle">
+          Sign in with your agricultural account to access tailored crop advisories &amp; live sensors
+        </p>
+      </div>
+
+      <form id="farmer-login-form">
+        <!-- Gmail / Email Field -->
+        <div class="form-group">
+          <label class="form-label" for="login-email" data-i18n="emailLabel">Gmail / Registered Email</label>
+          <div class="input-icon-wrap">
+            <svg class="input-left-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <input type="email" id="login-email" class="form-input" placeholder="farmer@agriweather.in or your Gmail" required data-i18n-placeholder="emailPlaceholder">
+          </div>
+        </div>
+
+        <!-- Password Field with Show/Hide Toggle -->
+        <div class="form-group">
+          <label class="form-label" for="login-password" data-i18n="passwordLabel">Password</label>
+          <div class="input-icon-wrap password-input-wrap">
+            <svg class="input-left-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required data-i18n-placeholder="passwordPlaceholder">
+            
+            <!-- Show/Hide Password Toggle Button -->
+            <button type="button" class="toggle-password-btn" id="toggle-password-btn" title="Toggle password visibility">
+              <svg id="eye-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span id="eye-text" data-i18n="showPassword">Show</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember Me & Forgot Password Row -->
+        <div class="form-row-between">
+          <label class="remember-wrap">
+            <input type="checkbox" id="remember-me" checked>
+            <span data-i18n="rememberMe">Remember Me on this device</span>
+          </label>
+          <a href="#" class="forgot-link" id="open-forgot-modal-link" data-i18n="forgotPassword">Forgot Password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-login-submit" id="login-submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span data-i18n="loginBtn">Login to Farmer Dashboard</span>
+        </button>
+
+        <p style="text-align:center;margin-top:1rem;color:var(--text-secondary,#64748b);font-size:.92rem;">
+          New to AgriWeather? <a href="#" id="open-register-link" class="forgot-link">Create a farmer account</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FARMER REGISTRATION MODAL -->
+  <div class="modal-backdrop" id="register-modal-backdrop" style="display:none;">
+    <div class="modal-card">
+      <img src="assets/wheat-accent.svg" alt="" class="modal-wheat-watermark" aria-hidden="true">
+      <button class="modal-close-btn" id="register-modal-close" title="Close Modal">&times;</button>
+      <div class="modal-header-box"><div class="modal-icon-badge">🌱</div><h3 class="modal-title">Create Farmer Account</h3><p class="modal-subtitle">Register to save weather reports and access your farmer dashboard.</p></div>
+      <form id="farmer-register-form">
+        <div class="form-group"><label class="form-label" for="register-name">Full name</label><input type="text" id="register-name" class="form-input" minlength="2" maxlength="100" autocomplete="name" required placeholder="Enter your full name"></div>
+        <div class="form-group"><label class="form-label" for="register-email">Email address</label><input type="email" id="register-email" class="form-input" maxlength="190" autocomplete="email" required placeholder="you@example.com"></div>
+        <div class="form-group"><label class="form-label" for="register-password">Password (minimum 8 characters)</label><input type="password" id="register-password" class="form-input" minlength="8" autocomplete="new-password" required placeholder="Create a strong password"></div>
+        <button type="submit" class="btn-login-submit" style="margin-top:1rem;">Create Account</button>
+        <p style="text-align:center;margin-top:1rem;">Already registered? <a href="#" id="back-to-login-from-register" class="forgot-link">Log in</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FORGOT PASSWORD MODAL
+       ========================================================================= -->
+  <div class="modal-backdrop" id="forgot-modal-backdrop" style="display: none;">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="forgot-modal-close" title="Close Modal">&times;</button>
+
+      <div class="modal-header-box">
+        <div class="modal-icon-badge">🔑</div>
+        <h3 class="modal-title" data-i18n="forgotModalTitle">Reset Farmer Password</h3>
+        <p class="modal-subtitle" data-i18n="forgotModalDesc">
+          Enter your registered Gmail or Kisan email address. We will send you an OTP and password reset link.
+        </p>
+      </div>
+
+      <form id="forgot-password-form">
+        <div class="form-group">
+          <label class="form-label" for="forgot-email" data-i18n="emailLabel">Gmail / Registered Email</label>
+          <div class="input-icon-wrap">
+            <svg class="input-left-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <input type="email" id="forgot-email" class="form-input" placeholder="farmer@agriweather.in" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login-submit" style="margin-top: 1rem;" id="send-reset-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span data-i18n="sendResetBtn">Send Password Reset Link</span>
+        </button>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="#" class="forgot-link" id="back-to-login-link" data-i18n="backToLogin">← Back to Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts: Multi-Language Dictionary first, then App logic -->
+  <script src="translations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

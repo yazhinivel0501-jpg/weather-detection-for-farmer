@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 240" fill="none">
+  <!-- Elegant Rice/Paddy Panicle Illustration -->
+  <!-- Gentle curved culm/stem -->
+  <path d="M40 235 C 45 180, 50 120, 65 70 C 72 48, 85 30, 115 25" stroke="#40916C" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Graceful Rice Leaves -->
+  <path d="M42 195 C 20 170, 8 135, 12 90 C 22 130, 36 160, 44 175 Z" fill="#2D6A4F" opacity="0.4"/>
+  <path d="M47 150 C 70 135, 95 125, 125 120 C 95 138, 70 152, 51 160 Z" fill="#52B788" opacity="0.4"/>
+
+  <!-- Drooping Rice Panicle branches & Grains -->
+  <!-- Branch 1 -->
+  <path d="M60 85 C 75 92, 90 102, 98 120" stroke="#52B788" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="80" cy="98" r="4.5" fill="#74C69D"/>
+  <circle cx="92" cy="110" r="4.5" fill="#52B788"/>
+  <circle cx="100" cy="123" r="4" fill="#40916C"/>
+
+  <!-- Branch 2 -->
+  <path d="M68 65 C 85 70, 105 82, 115 102" stroke="#52B788" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="90" cy="76" r="4.5" fill="#74C69D"/>
+  <circle cx="104" cy="90" r="4.5" fill="#52B788"/>
+  <circle cx="116" cy="105" r="4" fill="#40916C"/>
+
+  <!-- Branch 3 -->
+  <path d="M78 50 C 98 52, 120 62, 130 82" stroke="#52B788" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="98" cy="56" r="4.5" fill="#95D5B2"/>
+  <circle cx="115" cy="68" r="4.5" fill="#74C69D"/>
+  <circle cx="128" cy="85" r="4" fill="#52B788"/>
+
+  <!-- Branch 4 (Near tip) -->
+  <path d="M92 38 C 110 38, 128 46, 135 60" stroke="#74C69D" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="112" cy="42" r="4" fill="#95D5B2"/>
+  <circle cx="126" cy="50" r="4" fill="#74C69D"/>
+  <circle cx="135" cy="62" r="3.5" fill="#52B788"/>
+
+  <!-- Tip grains -->
+  <circle cx="120" cy="28" r="4" fill="#D8F3DC"/>
+  <circle cx="130" cy="34" r="3.5" fill="#95D5B2"/>
+</svg>

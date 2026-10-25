@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" preserveAspectRatio="none" fill="none">
+  <defs>
+    <linearGradient id="skyGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B4332" stop-opacity="0.1"/>
+      <stop offset="60%" stop-color="#2D6A4F" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#40916C" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="hillFar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D6A4F" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#1B4332" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="hillMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40916C" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#2D6A4F" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="hillNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#52B788" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1B4332" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Distant subtle mountains / horizon -->
+  <path d="M0 240 Q 250 180, 500 230 T 1000 200 Q 1120 220, 1200 210 L 1200 450 L 0 450 Z" fill="url(#hillFar)"/>
+
+  <!-- Midground terraced rice & wheat fields -->
+  <path d="M0 290 Q 220 240, 480 270 T 920 250 Q 1080 260, 1200 245 L 1200 450 L 0 450 Z" fill="url(#hillMid)"/>
+
+  <!-- Contours / Crop field ridges -->
+  <path d="M-50 330 C 200 300, 450 340, 750 310 C 950 290, 1100 320, 1250 300" stroke="#74C69D" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="6,8"/>
+  <path d="M-20 370 C 250 340, 550 380, 850 350 C 1020 330, 1150 360, 1250 340" stroke="#95D5B2" stroke-width="2.5" stroke-opacity="0.3" stroke-dasharray="8,10"/>
+  <path d="M0 410 C 300 380, 600 420, 950 390 C 1100 375, 1180 400, 1250 385" stroke="#B7E4C7" stroke-width="3" stroke-opacity="0.35"/>
+
+  <!-- Foreground rolling lush green field -->
+  <path d="M0 350 Q 300 300, 650 340 T 1200 320 L 1200 450 L 0 450 Z" fill="url(#hillNear)"/>
+
+  <!-- Subtle tractor silhouette in far distance -->
+  <g transform="translate(860, 235) scale(0.65)" opacity="0.45" fill="#1B4332">
+    <circle cx="28" cy="24" r="12" fill="#081C15"/>
+    <circle cx="6" cy="27" r="7" fill="#081C15"/>
+    <path d="M12 24 L 20 24 L 20 12 L 8 16 Z"/>
+    <path d="M20 10 L 28 10 L 28 20 L 20 20 Z"/>
+    <rect x="22" y="4" width="2" height="6"/>
+  </g>
+
+  <!-- Stylized farmer silhouette with straw hat checking crops -->
+  <g transform="translate(240, 275) scale(0.7)" opacity="0.5" fill="#081C15">
+    <!-- Hat -->
+    <ellipse cx="25" cy="12" rx="14" ry="4"/>
+    <path d="M17 12 C 17 6, 33 6, 33 12 Z"/>
+    <!-- Head -->
+    <circle cx="25" cy="14" r="3.5"/>
+    <!-- Torso -->
+    <path d="M20 18 L 30 18 L 32 36 L 18 36 Z"/>
+    <!-- Arm reaching towards crops -->
+    <path d="M30 20 L 42 26 L 46 24" stroke="#081C15" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Legs -->
+    <line x1="21" y1="36" x2="20" y2="52" stroke="#081C15" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="29" y1="36" x2="31" y2="52" stroke="#081C15" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Foreground subtle wheat & paddy stalks framing sides -->
+  <g transform="translate(20, 310) scale(0.55)" opacity="0.75">
+    <path d="M30 150 Q 40 80, 50 10" stroke="#74C69D" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="44" cy="40" rx="6" ry="12" transform="rotate(-20 44 40)" fill="#95D5B2"/>
+    <ellipse cx="56" cy="30" rx="6" ry="12" transform="rotate(20 56 30)" fill="#74C69D"/>
+    <ellipse cx="48" cy="15" rx="5" ry="10" transform="rotate(-15 48 15)" fill="#B7E4C7"/>
+  </g>
+  <g transform="translate(1120, 310) scale(0.55)" opacity="0.75">
+    <path d="M50 150 Q 40 80, 30 10" stroke="#74C69D" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36" cy="40" rx="6" ry="12" transform="rotate(20 36 40)" fill="#95D5B2"/>
+    <ellipse cx="24" cy="30" rx="6" ry="12" transform="rotate(-20 24 30)" fill="#74C69D"/>
+    <ellipse cx="32" cy="15" rx="5" ry="10" transform="rotate(15 32 15)" fill="#B7E4C7"/>
+  </g>
+</svg>
